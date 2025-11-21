@@ -8,7 +8,7 @@ const ExpenseForm = ({ AddingExpense }) => {
     const handlesubmit = (e) => {
         e.preventDefault();
         if (title === "" || amount === "") {
-           return alert("Please enter all fields!")
+            return alert("Please enter all fields!")
         }
         console.log(title, amount)
         settitle("")
