@@ -1,20 +1,32 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const ExpenseForm = ({ AddingExpense }) => {
 
     const [title, settitle] = useState("")
     const [amount, setamount] = useState("")
+    const titleRef = useRef()
+
+    useEffect(() => {   //focus after input clearing
+        if (title === "") {
+            titleRef.current?.focus();
+        }
+    }, [title]);
 
     const handlesubmit = (e) => {
         e.preventDefault();
         if (title === "" || amount === "") {
-            return alert("Please enter all fields!")
+            return alert("Please enter all fields!");
         }
-        console.log(title, amount)
-        settitle("")
-        setamount("")
-    }
+        const newExpense = {
+            id: Date.now(),
+            title: title,
+            amount: parseFloat(amount),
+        };
+        AddingExpense(newExpense);
 
+        settitle("");
+        setamount("");
+    };
 
     return (
         <form className="mb-6" onSubmit={handlesubmit}>
@@ -22,8 +34,8 @@ const ExpenseForm = ({ AddingExpense }) => {
                 <input value={title}
                     onChange={(e) => {
                         settitle(e.target.value);
-                    }
-                    }
+                    }}
+                    ref={titleRef}
                     type="text"
                     placeholder="Expense Title"
                     className="border rounded-xl p-3 w-full focus:outline-none focus:ring-2 focus:ring-black dark:bg-gray-700 dark:text-gray-100 dark:border-gray-600"

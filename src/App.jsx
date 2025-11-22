@@ -4,6 +4,7 @@ import ExpenseList from "./components/ExpenseList";
 
 const App = () => {
   const [expense, setExpense] = useState([]);
+
   const addExpense = (expense) => {
     setExpense((prev) => [...prev, expense]);
   };
@@ -20,10 +21,10 @@ const App = () => {
         {/* Expense Form UI */}
         <ExpenseForm AddingExpense={addExpense} />
         <h3 className="text-white font-semibold mb-5 text-xl ">
-          Total Expense: <span className="text-red-600 font-bold  ">₹500</span>{" "}
+          Total Expense: <span className="text-red-600 font-bold  ">₹500</span>
         </h3>
         {/* Expense List UI */}
-        <ExpenseList expnese={expense} onDelete={deleteExpense}/>
+        <ExpenseList expense={expense} onDelete={deleteExpense}/>
       </div>
     </div> 
   );
